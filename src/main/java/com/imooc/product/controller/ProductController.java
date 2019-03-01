@@ -2,6 +2,7 @@ package com.imooc.product.controller;
 
 import com.imooc.product.domain.ProductCategory;
 import com.imooc.product.domain.ProductInfo;
+import com.imooc.product.dto.CartDTO;
 import com.imooc.product.service.CategoryService;
 import com.imooc.product.service.ProductService;
 import com.imooc.product.utils.ResultVoUtil;
@@ -10,9 +11,7 @@ import com.imooc.product.vo.ProductVo;
 import com.imooc.product.vo.ResultVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,11 +77,21 @@ public class ProductController {
     /**
      * 获取商品列表
      * 专门给订单服务用的
+     *
      * @param productIdList
      * @return
      */
-    @GetMapping("listForOrder")
-    public List<ProductInfo> listForOrder(List<String> productIdList) {
+    @PostMapping("/listForOrder")
+    public List<ProductInfo> listForOrder(@RequestBody List<String> productIdList) {
         return productService.findList(productIdList);
+    }
+
+    /**
+     * 扣库存
+     * @param cartDTOList
+     */
+    @PostMapping("/decreaseStock")
+    public void decreaseStock(@RequestBody List<CartDTO> cartDTOList) {
+        productService.decreaseStock(cartDTOList);
     }
 }

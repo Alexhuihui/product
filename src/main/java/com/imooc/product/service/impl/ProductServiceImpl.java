@@ -27,4 +27,14 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductInfo> findUpAll() {
         return productInfoRepository.findByProductStatus(ProductStatusEnum.UP.getCode());
     }
+
+    /**
+     * 查询商品列表（给订单服务调用）
+     * @param productIdList
+     * @return
+     */
+    @Override
+    public List<ProductInfo> findList(List<String> productIdList) {
+        return productInfoRepository.findByProductIdIn(productIdList);
+    }
 }

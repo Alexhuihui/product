@@ -4,6 +4,7 @@ import com.imooc.product.domain.ProductCategory;
 import com.imooc.product.domain.ProductInfo;
 import com.imooc.product.service.CategoryService;
 import com.imooc.product.service.ProductService;
+import com.imooc.product.utils.ResultVoUtil;
 import com.imooc.product.vo.ProductInfoVo;
 import com.imooc.product.vo.ProductVo;
 import com.imooc.product.vo.ResultVo;
@@ -71,11 +72,6 @@ public class ProductController {
             productVoList.add(productVo);
         }
 
-        ResultVo resultVo = new ResultVo();
-        resultVo.setCode(0);
-        resultVo.setData("成功");
-        resultVo.setData(productVoList);
-
-        return resultVo;
+        return ResultVoUtil.success(productVoList);
     }
 }
